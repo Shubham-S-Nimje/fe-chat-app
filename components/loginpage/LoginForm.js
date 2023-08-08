@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [enteredMail, SetenteredMail] = useState("");
   const [enteredpass, Setenteredpass] = useState("");
+  const router = useRouter();
 
   const OnloginHandler = (e) => {
     e.preventDefault();
     console.log(enteredMail, enteredpass);
-    localStorage.setItem('userToken',enteredMail)
+    localStorage.setItem("userToken", enteredMail);
+    router.push("/");
   };
   return (
     <form
-      className="p-12 bg-white items-center text-center justify-center rounded-sm shadow-2xl h-5/6"
+      className="p-12 bg-white items-center text-center justify-center rounded-sm shadow-2xl"
       onSubmit={OnloginHandler}
     >
       <h3 className="text-3xl m-2">Enter Your Details</h3>

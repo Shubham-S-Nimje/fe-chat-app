@@ -2,22 +2,22 @@
 import BrandLogo from "@/components/loginpage/BrandLogo";
 import CreateaccForm from "@/components/loginpage/CreateaccForm";
 import LoginForm from "@/components/loginpage/LoginForm";
-import { redirect } from "next/dist/server/api-utils";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const isAuth = useSelector((state) => state.authentication.isAuthenticated);
-  const [login, Setlogin] = useState(isAuth);
+  const router = useRouter();
+  const [loginform, Setloginform] = useState(true);
 
   useEffect(() => {
-    if (isAuth) {
-      redirect("/");
+    const userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      router.push("/");
     }
-  }, []);
+  }, [router]);
 
-  console.log(login);
+  // console.log(login);
 
   return (
     <div className="bg-darkgreen h-60 top">
@@ -25,11 +25,11 @@ const Login = () => {
         <div className="w-5/6 my-16 h-screen mx-40">
           <div className="flex justify-between">
             <BrandLogo />
-            {login ? (
+            {loginform ? (
               <button
                 className="text-2xl text-white mx-4"
                 onClick={() => {
-                  Setlogin(false);
+                  Setloginform(false);
                 }}
               >
                 Don't you have an account?
@@ -41,7 +41,7 @@ const Login = () => {
               <button
                 className="text-2xl text-white mx-4"
                 onClick={() => {
-                  Setlogin(true);
+                  Setloginform(true);
                 }}
               >
                 Already using chatapp?
@@ -51,7 +51,7 @@ const Login = () => {
               </button>
             )}
           </div>
-          {login ? <LoginForm /> : <CreateaccForm />}
+          {loginform ? <LoginForm /> : <CreateaccForm />}
         </div>
       </div>
     </div>
