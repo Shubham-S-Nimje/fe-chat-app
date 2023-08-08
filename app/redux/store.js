@@ -1,10 +1,9 @@
+"use client";
 import { configureStore } from "@reduxjs/toolkit";
-import AuthSlice from "./auth";
-
-export const authActions = AuthSlice.actions;
+import AuthSlice from "./authslice";
 
 const store = configureStore({
-  reducer: { auth: AuthSlice.reducer },
+  reducer: { authentication: AuthSlice },
 });
 
 export default store;

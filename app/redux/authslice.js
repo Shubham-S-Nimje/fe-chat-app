@@ -1,6 +1,10 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialAuthState = { isAuthenticated: false };
+const isAuth = localStorage.getItem("UserToken") ? true : false;
+// console.log(isAuth);
+
+const initialAuthState = { isAuthenticated: isAuth };
 
 const AuthSlice = createSlice({
   name: "authentication",

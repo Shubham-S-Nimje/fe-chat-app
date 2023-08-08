@@ -2,14 +2,22 @@
 import BrandLogo from "@/components/loginpage/BrandLogo";
 import CreateaccForm from "@/components/loginpage/CreateaccForm";
 import LoginForm from "@/components/loginpage/LoginForm";
+import { redirect } from "next/dist/server/api-utils";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Login = () => {
-  const [login, Setlogin] = useState(true);
-  const isAuth = useSelector((state) => state.auth.isAuthenticated);
-  
-  console.log(isAuth);
+  const isAuth = useSelector((state) => state.authentication.isAuthenticated);
+  const [login, Setlogin] = useState(isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      redirect("/");
+    }
+  }, []);
+
+  console.log(login);
 
   return (
     <div className="bg-darkgreen h-60 top">
