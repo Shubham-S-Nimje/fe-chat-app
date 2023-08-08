@@ -97,7 +97,7 @@ export default function Home() {
             <input
               src="/group.svg"
               placeholder="Search or start new chat"
-              className="w-full bg-gray rounded-lg px-4"
+              className="w-full bg-gray rounded-full px-4"
             />
             <Image
               src="/menu.svg"
