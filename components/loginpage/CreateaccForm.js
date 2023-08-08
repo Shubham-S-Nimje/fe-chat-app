@@ -2,10 +2,22 @@ import React, { useState } from "react";
 
 const CreateaccForm = () => {
   const [showPass, SetshowPass] = useState(false);
-  const [enteredMail, SetenteredMail] = useState();
-  const [enteredpass, Setenteredpass] = useState();
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [enteredusername, Setenteredusername] = useState("");
+  const [enteredMail, SetenteredMail] = useState("");
+  const [enteredpass, Setenteredpass] = useState("");
+  const [enteredconfirmpass, Setenteredconfirmpass] = useState("");
+
+  const onCreateaccHandler = (e) => {
+    e.preventDefault();
+    console.log(enteredusername, enteredMail, enteredpass, enteredconfirmpass);
+  };
+
   return (
-    <form className="p-12 bg-white items-center text-center justify-center rounded-sm shadow-2xl">
+    <form
+      className="p-12 bg-white items-center text-center justify-center rounded-sm shadow-2xl"
+      onSubmit={onCreateaccHandler}
+    >
       <h3 className="text-3xl m-2">Enter Your Details</h3>
       <p className="text-md m-2">
         Please enter your details to Create Account.
@@ -17,6 +29,9 @@ const CreateaccForm = () => {
         <input
           type="Username"
           name="Username"
+          onChange={(e) => {
+            Setenteredusername(e.target.value);
+          }}
           className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
           required
         />
@@ -28,6 +43,9 @@ const CreateaccForm = () => {
         <input
           type="email"
           name="email"
+          onChange={(e) => {
+            SetenteredMail(e.target.value);
+          }}
           className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
           required
         />
@@ -39,6 +57,9 @@ const CreateaccForm = () => {
         <input
           type="password"
           name="password"
+          onChange={(e) => {
+            Setenteredpass(e.target.value);
+          }}
           className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
           required
         />
@@ -50,9 +71,16 @@ const CreateaccForm = () => {
         <input
           type={`${showPass ? "text" : "password"}`}
           name="password"
+          onChange={(e) => {
+            Setenteredconfirmpass(e.target.value);
+            setPasswordsMatch(enteredpass === e.target.value);
+          }}
           className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
           required
         />
+        {!passwordsMatch && (
+          <p className="text-red-500">Passwords do not match.</p>
+        )}
       </div>
       <input
         type="checkbox"
