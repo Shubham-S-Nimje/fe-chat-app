@@ -1,5 +1,7 @@
+"use client";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import ReduxProvider from "./redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +16,9 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/whatsapp.svg" sizes="32x32" />
       </head>
-      <body className='bg-gray'>{children}</body>
+      <body className="bg-gray">
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }

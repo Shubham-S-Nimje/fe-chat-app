@@ -7,6 +7,7 @@ const LoginForm = () => {
   const OnloginHandler = (e) => {
     e.preventDefault();
     console.log(enteredMail, enteredpass);
+    localStorage.setItem('userToken',enteredMail)
   };
   return (
     <form

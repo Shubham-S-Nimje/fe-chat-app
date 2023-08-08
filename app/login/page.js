@@ -3,9 +3,14 @@ import BrandLogo from "@/components/loginpage/BrandLogo";
 import CreateaccForm from "@/components/loginpage/CreateaccForm";
 import LoginForm from "@/components/loginpage/LoginForm";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const [login, Setlogin] = useState(true);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  
+  console.log(isAuth);
+
   return (
     <div className="bg-darkgreen h-60 top">
       <div className="min-h-screen flex items-center justify-center text-xl text-darkgray">
