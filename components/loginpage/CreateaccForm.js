@@ -86,7 +86,7 @@ const CreateaccForm = () => {
         type="checkbox"
         className="checked:bg-black"
         onClick={() => {
-          console.log(showPass);
+          // console.log(showPass);
           SetshowPass(!showPass);
         }}
       />

@@ -6,8 +6,8 @@ const UserStripe = () => {
     <div className="flex w-full bg-darkgreen justify-between p-4 sticky top-0">
       <div className="flex">
         <Image
-          src="/group.svg"
-          alt="group"
+          src="/whatsapp.svg"
+          alt="whatsapp"
           className="w-8 m-2 h-auto"
           width={50}
           height={50}

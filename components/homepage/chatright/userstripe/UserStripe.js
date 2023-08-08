@@ -1,7 +1,9 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const UserStripe = () => {
+  const router = useRouter();
   return (
     <div className="flex w-full bg-darkgreen justify-between p-4 sticky top-0">
       <div className="flex">
@@ -24,13 +26,16 @@ const UserStripe = () => {
         width={50}
         height={50}
       />
-      <Image
-        src="/menudots.svg"
-        alt="menudots"
-        className="w-8 mx-4 h-auto"
-        width={50}
-        height={50}
-      />
+      <button
+        type="button"
+        className="bg-green text-white px-1"
+        onClick={() => {
+          localStorage.removeItem("userToken");
+          router.push("/login");
+        }}
+      >
+        LOG OUT
+      </button>
     </div>
   );
 };

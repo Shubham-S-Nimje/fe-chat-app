@@ -11,12 +11,12 @@ const Home = () => {
   const [login, Setlogin] = useState(false);
 
   useEffect(() => {
-    const userToken = (localStorage.getItem("userToken"));
+    const userToken = localStorage.getItem("userToken");
     if (!userToken) {
       router.push("/login");
+    } else {
+      Setlogin(true);
     }
-    else{
-    Setlogin(true)}
   }, [router, login]);
 
   return (
