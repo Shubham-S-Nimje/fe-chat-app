@@ -7,7 +7,7 @@ const Menubar = () => {
   const [menuclick, setmenuclick] = useState(false);
 
   return (
-    <div className="block">
+    <div className="block px-1 my-2">
       <button
         type="button"
         className="px-1 my-2 block cursor-pointer"
@@ -47,20 +47,18 @@ const Menubar = () => {
         <button
           type="button"
           className="px-1 my-2 block"
-          // onClick={() => {
-          //   localStorage.removeItem("userToken");
-          //   router.push("/login");
-          // }}
+          onClick={() => {
+            router.push("/dashboard");
+          }}
         >
           Dashboard
         </button>
         <button
           type="button"
           className="px-1 my-2 block"
-          // onClick={() => {
-          //   localStorage.removeItem("userToken");
-          //   router.push("/login");
-          // }}
+          onClick={() => {
+            router.push("/dashboard");
+          }}
         >
           Settings
         </button>

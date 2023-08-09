@@ -14,7 +14,7 @@ const LoginForm = () => {
   };
   return (
     <form
-      className="p-12 max-md:p-10 bg-white items-center text-center justify-center rounded-sm shadow-2xl max-sm:text-sm"
+      className="p-12 max-md:p-10 bg-white items-center text-center justify-center rounded-lg shadow-2xl max-sm:text-sm"
       onSubmit={OnloginHandler}
     >
       <h3 className="text-3xl max-sm:text-lg m-2">Enter Your Details</h3>

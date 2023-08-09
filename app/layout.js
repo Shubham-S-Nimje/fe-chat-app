@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/whatsapp.svg" sizes="32x32" />
       </head>
-      <body className="bg-gray">
+      <body className="bg-background">
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
