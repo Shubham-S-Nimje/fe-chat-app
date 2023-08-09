@@ -3,7 +3,7 @@ import React from "react";
 
 function SearchUsers() {
   return (
-    <div className="flex w-full bg-white justify-between p-2 sticky top-20 shadow-md">
+    <div className="flex w-full bg-white justify-between p-2 md:sticky top-20 shadow-md">
       <div className="flex justify-between w-full">
         <input
           src="/group.svg"

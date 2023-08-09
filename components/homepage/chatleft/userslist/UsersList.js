@@ -56,7 +56,7 @@ const obj = [
 
 const UsersList = () => {
   return (
-    <div className="h-screen overflow-auto py-20">
+    <div className="h-screen overflow-auto md:py-20">
       {obj.map((chatdata) => {
         // console.log(chatdata);
         return (

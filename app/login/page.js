@@ -26,33 +26,33 @@ const Login = () => {
   return (
     <div className="bg-darkgreen h-60 top">
       {!login && (
-        <div className="min-h-screen flex items-center justify-center text-xl text-darkgray">
-          <div className="w-5/6 my-16 h-screen mx-40">
-            <div className="flex justify-between">
+        <div className="min-h-screen flex items-center justify-center text-xl max-md:text-sm text-darkgray">
+          <div className="w-5/6 max-md:w-full my-16 max-md:my-10 h-screen max-md:mx-10 mx-40">
+            <div className="justify-between my-4 text-center">
               <BrandLogo />
               {loginform ? (
                 <button
-                  className="text-2xl text-white mx-4"
+                  className="text-2xl max-md:text-lg text-white mx-4"
                   onClick={() => {
                     Setloginform(false);
                   }}
                 >
                   Don't you have an account?
-                  <span className="bg-green px-2 py-1 mx-2 rounded-xl">
+                  <p className="bg-green max-md:text-sm px-2 py-1 mx-2 rounded-xl">
                     SIGN UP
-                  </span>
+                  </p>
                 </button>
               ) : (
                 <button
-                  className="text-2xl text-white mx-4"
+                  className="text-2xl max-md:text-lg text-white mx-4"
                   onClick={() => {
                     Setloginform(true);
                   }}
                 >
                   Already using chatapp?
-                  <span className="bg-green px-2 py-1 mx-2 rounded-xl">
+                  <p className="bg-green max-md:text-sm px-2 py-1 mx-2 rounded-xl">
                     SIGN IN
-                  </span>
+                  </p>
                 </button>
               )}
             </div>

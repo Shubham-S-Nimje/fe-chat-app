@@ -19,7 +19,7 @@ const Menubar = () => {
         <Image
           src="/menudots.svg"
           alt="menudots"
-          className="w-8 mx-4 h-full"
+          className="w-8 mx-4 h-full max-sm:w-6"
           width={50}
           height={50}
         />

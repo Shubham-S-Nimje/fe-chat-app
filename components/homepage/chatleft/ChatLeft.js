@@ -4,9 +4,9 @@ import UserStripe from "./userstripe/UserStripe";
 import SearchUsers from "./searchusers/SearchUsers";
 import UsersList from "./userslist/UsersList"
 
-const ChatLeft = () => {
+const ChatLeft = (props) => {
   return (
-    <div className="w-1/3 block bg-white">
+    <div className="md:w-1/3 block bg-white">
       <UserStripe />
       <SearchUsers />
       <UsersList />

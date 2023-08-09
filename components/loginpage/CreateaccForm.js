@@ -18,11 +18,11 @@ const CreateaccForm = () => {
 
   return (
     <form
-      className="p-12 bg-white items-center text-center justify-center rounded-sm shadow-2xl"
+      className="p-12 max-md:p-10 bg-white items-center text-center justify-center rounded-sm shadow-2xl max-sm:text-sm"
       onSubmit={onCreateaccHandler}
     >
-      <h3 className="text-3xl m-2">Enter Your Details</h3>
-      <p className="text-md m-2">
+      <h3 className="text-3xl  max-sm:text-lg m-2">Enter Your Details</h3>
+      <p className="text-md  max-sm:text-sm m-2">
         Please enter your details to Create Account.
       </p>
       <div className="my-6">
@@ -35,7 +35,7 @@ const CreateaccForm = () => {
           onChange={(e) => {
             Setenteredusername(e.target.value);
           }}
-          className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
+          className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
           required
         />
       </div>
@@ -49,7 +49,7 @@ const CreateaccForm = () => {
           onChange={(e) => {
             SetenteredMail(e.target.value);
           }}
-          className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
+          className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
           required
         />
       </div>
@@ -63,7 +63,7 @@ const CreateaccForm = () => {
           onChange={(e) => {
             Setenteredpass(e.target.value);
           }}
-          className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
+          className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
           required
         />
       </div>
@@ -78,7 +78,7 @@ const CreateaccForm = () => {
             Setenteredconfirmpass(e.target.value);
             setPasswordsMatch(enteredpass === e.target.value);
           }}
-          className="w-1/2 px-4 py-2 border rounded-sm border-darkgray"
+          className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
           required
         />
         {!passwordsMatch && (

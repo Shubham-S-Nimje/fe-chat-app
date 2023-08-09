@@ -6,7 +6,7 @@ import MessageStripe from "./messagestripe/MessageStripe";
 
 const ChatRight = () => {
   return (
-    <div className="w-2/3 block text-white h-screen border-l-2 border-gray">
+    <div className="md:w-2/3 block text-white h-screen border-l-2 border-gray">
       <UserStripe />
       <UserChats />
       <MessageStripe />

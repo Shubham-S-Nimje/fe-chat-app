@@ -1,6 +1,8 @@
 "use client";
+import Menubar from "@/components/common/Menubar";
 import ChatLeft from "@/components/homepage/chatleft/ChatLeft";
 import ChatRight from "@/components/homepage/chatright/ChatRight";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Fragment } from "react";
@@ -9,6 +11,7 @@ import { useState } from "react";
 const Home = () => {
   const router = useRouter();
   const [login, Setlogin] = useState(false);
+  const [showusers, Setshowusers] = useState(true);
 
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
@@ -20,7 +23,57 @@ const Home = () => {
   }, [router, login]);
 
   return (
-    <main className="flex items-center justify-between bg-background h-screen overflow-hidden">
+    <main className="sm:block sm:w-screen md:flex items-center justify-between bg-background h-screen overflow-hidden">
+      <div className="flex w-full bg-darkgreen justify-between items-center p-4 sticky top-0 md:hidden">
+        <div className="flex items-center">
+          <Image
+            src="/whatsapp.svg"
+            alt="whatsapp"
+            className="w-8 m-2 h-auto max-sm:w-6"
+            width={50}
+            height={50}
+          />
+          <p className="text-md font-semibold text-white min-w-full">
+            CHATAPP WEB
+          </p>
+        </div>
+        <div className="flex">
+          <button
+            type="button"
+            className="px-1 my-2 block cursor-pointer"
+            onClick={() => {
+              Setshowusers(!showusers);
+              // console.log(menuclick);
+            }}
+          >
+            {!showusers && (
+              <Image
+                src="/group.svg"
+                alt="group"
+                className="w-8 mx-4 h-auto max-sm:w-6"
+                width={50}
+                height={50}
+              />
+            )}
+            {showusers && (
+              <Image
+                src="/message.svg"
+                alt="message"
+                className="w-8 mx-4 h-auto max-sm:w-6"
+                width={50}
+                height={50}
+              />
+            )}
+          </button>
+          <Menubar/>
+        </div>
+      </div>
+      {login && (
+        <div className="md:hidden">
+          {showusers && <ChatLeft />}
+          {!showusers && <ChatRight />}
+        </div>
+      )}
       {login && (
         <Fragment>
           <ChatLeft />
