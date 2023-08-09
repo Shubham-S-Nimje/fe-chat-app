@@ -56,7 +56,7 @@ const obj = [
 
 const UsersList = () => {
   return (
-    <div className="h-screen overflow-auto py-20 text-darkg">
+    <div className="h-screen overflow-auto py-20">
       {obj.map((chatdata) => {
         // console.log(chatdata);
         return (
@@ -72,7 +72,7 @@ const UsersList = () => {
               height={50}
             />
             <div className="block m-2 text-start my-auto w-full">
-              <div className="text-xl font-bold">{chatdata.title}</div>
+              <div className="text-xl font-semibold">{chatdata.title}</div>
               <div>{chatdata.message}</div>
             </div>
             <div className="block m-2 text-center w-1/3">

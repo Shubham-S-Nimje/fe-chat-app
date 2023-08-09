@@ -1,6 +1,8 @@
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const CreateaccForm = () => {
+  const router = useRouter();
   const [showPass, SetshowPass] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [enteredusername, Setenteredusername] = useState("");
@@ -11,6 +13,7 @@ const CreateaccForm = () => {
   const onCreateaccHandler = (e) => {
     e.preventDefault();
     console.log(enteredusername, enteredMail, enteredpass, enteredconfirmpass);
+    router.push("/");
   };
 
   return (

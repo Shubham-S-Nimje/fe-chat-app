@@ -74,7 +74,7 @@ const UserChats = () => {
                   height={50}
                 />
                 <div className="block p-2 text-end max-w-1/2">
-                  <div className="text-darkgray">{chatdata.title}</div>
+                  <div className="text-darkgray font-semibold">{chatdata.title}</div>
                   <div>{chatdata.message}</div>
                   <div className="text-xs text-end">
                     12:19 AM<span>✔</span>
@@ -92,7 +92,7 @@ const UserChats = () => {
             >
               <div className="flex bg-white rounded-2xl">
                 <div className="block p-2 text-end max-w-1/2">
-                  <div className="text-darkgray">{chatdata.title}</div>
+                  <div className="text-darkgray font-semibold">{chatdata.title}</div>
                   <div>{chatdata.message}</div>
                   <div className="text-xs text-end">
                     12:19 AM<span>✔</span>
