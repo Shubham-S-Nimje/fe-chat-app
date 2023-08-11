@@ -26,17 +26,17 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        localStorage.setItem("userToken", enteredMail);
+        // console.log(data);
+        localStorage.setItem("userToken", data.user.authToken);
         router.push("/");
       } else {
         const errData = await response.json();
-        console.log(errData);
-        alert(errData.message);
+        // console.log(errData);
+        alert(errData);
       }
     } catch {
       (err) => {
-        console.log(err);
+        // console.log(err);
         alert(err);
       };
     }

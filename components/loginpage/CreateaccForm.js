@@ -5,8 +5,10 @@ const CreateaccForm = () => {
   const router = useRouter();
   const [showPass, SetshowPass] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [phoneLength, setphoneLength] = useState(true);
   const [enteredusername, Setenteredusername] = useState("");
   const [enteredMail, SetenteredMail] = useState("");
+  const [enteredphon, Setenteredphon] = useState("");
   const [enteredpass, Setenteredpass] = useState("");
   const [enteredconfirmpass, Setenteredconfirmpass] = useState("");
 
@@ -18,13 +20,12 @@ const CreateaccForm = () => {
       username: enteredusername,
       email: enteredMail,
       password: enteredpass,
+      phonenumber: enteredphon,
     };
 
     if (enteredpass === enteredconfirmpass) {
-      const url = "http://localhost:4000/auth/add-user";
-
       try {
-        const response = await fetch(url, {
+        const response = await fetch("http://localhost:4000/auth/add-user", {
           method: "POST",
           body: JSON.stringify(obj),
           headers: {
@@ -39,7 +40,7 @@ const CreateaccForm = () => {
         } else {
           const errData = await response.json();
           // console.log(errData);
-          alert(errData);
+          alert(errData.error.errors[0].message);
         }
       } catch {
         (err) => {
@@ -88,6 +89,22 @@ const CreateaccForm = () => {
           className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
           required
         />
+      </div>
+      <div className="my-6">
+        <label htmlFor="phonenumber" className="block mb-2">
+          Mobile Number:
+        </label>
+        <input
+          type="number"
+          name="phonenumber"
+          onChange={(e) => {
+            Setenteredphon(e.target.value);
+            setphoneLength(enteredphon.length >= 9 && enteredphon.length < 12);
+          }}
+          className="w-1/2 max-sm:w-full px-4 py-2 border rounded-sm border-darkgray"
+          required
+        />
+        {!phoneLength && <p className="text-red-500">Invalid mobile number!</p>}
       </div>
       <div className="mb-6">
         <label htmlFor="password" className="block mb-2">
