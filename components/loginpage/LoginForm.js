@@ -28,6 +28,7 @@ const LoginForm = () => {
         const data = await response.json();
         // console.log(data);
         localStorage.setItem("userToken", data.user.authToken);
+        localStorage.setItem("userEmail", enteredMail);
         router.push("/");
       } else {
         const errData = await response.json();

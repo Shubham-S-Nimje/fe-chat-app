@@ -1,10 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const MessageStripe = () => {
+const MessageStripe = (props) => {
   const [enteredMessage, setenteredMessage] = useState("");
   const userToken = localStorage.getItem("userToken");
-  const userEmail = localStorage.getItem("userEmail");
 
   const messageSubmitHandler = async (e) => {
     e.preventDefault();
@@ -27,6 +26,8 @@ const MessageStripe = () => {
       if (response.ok) {
         const data = await response.json();
         // console.log(data);
+        setenteredMessage('')
+        props.Setchatupdate(!props.chatupdate)
       } else {
         const errData = await response.json();
         // console.log(errData);
@@ -72,6 +73,7 @@ const MessageStripe = () => {
           src="/group.svg"
           placeholder="Message"
           className="w-full bg-white text-black rounded-full px-4 m-2"
+          value={enteredMessage}
           onChange={(e) => {
             setenteredMessage(e.target.value);
           }}
