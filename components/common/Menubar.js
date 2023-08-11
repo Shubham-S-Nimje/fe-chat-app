@@ -67,6 +67,7 @@ const Menubar = () => {
           className="px-2 block bg-green text-white rounded-lg mt-2"
           onClick={() => {
             localStorage.removeItem("userToken");
+            localStorage.removeItem("userEmail");
             router.push("/login");
           }}
         >

@@ -10,6 +10,7 @@ import { useState } from "react";
 
 const Home = () => {
   const router = useRouter();
+  const [users, Setusers] = useState({});
   const [login, Setlogin] = useState(false);
   const [showusers, Setshowusers] = useState(true);
 
@@ -21,6 +22,23 @@ const Home = () => {
       Setlogin(true);
     }
   }, [router, login]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:4000/auth/fetch-users`);
+        const data = await response.json();
+
+        // console.log(data);
+        Setusers(data.users.users)
+      } catch {
+        alert("error");
+      }
+    }
+    {
+      login && fetchData();
+    }
+  }, [login]);
 
   return (
     <main className="sm:block sm:w-screen md:flex items-center justify-between bg-background h-screen overflow-hidden">
@@ -65,7 +83,7 @@ const Home = () => {
               />
             )}
           </button>
-          <Menubar/>
+          <Menubar />
         </div>
       </div>
       {login && (

@@ -36,6 +36,7 @@ const CreateaccForm = () => {
         if (response.ok) {
           const data = await response.json();
           // console.log(data);
+          alert(data.message);
           router.push("/");
         } else {
           const errData = await response.json();

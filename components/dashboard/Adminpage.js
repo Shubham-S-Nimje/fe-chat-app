@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import UsersList from "../homepage/chatleft/userslist/UsersList";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import AdduserForm from "./AdduserForm";
 
@@ -58,6 +57,25 @@ const obj = [
 
 const Adminpage = () => {
   const [addUser, setaddUser] = useState(false);
+  const [users, Setusers] = useState();
+  const userToken = localStorage.getItem("userToken");
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:4000/auth/fetch-users`);
+        const data = await response.json();
+
+        // console.log(data);
+        Setusers(data.users.users);
+      } catch {
+        alert("error");
+      }
+    }
+    {
+      userToken && fetchData();
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -89,51 +107,54 @@ const Adminpage = () => {
       </div>
       {addUser && <AdduserForm />}
       <div className="h-screen overflow-auto">
-        {obj.map((chatdata) => {
-          // console.log(chatdata);
-          return (
-            <div
-              key={chatdata.id}
-              className="flex max-w-full bg-white justify-between ite p-1"
-            >
-              <Image
-                src="/user.svg"
-                alt="user"
-                className="w-16 h-auto"
-                width={50}
-                height={50}
-              />
-              <div className="block m-2 text-start my-auto w-full">
-                <div className="text-xl font-semibold">{chatdata.title}</div>
-                <div>{chatdata.message}</div>
-              </div>
-              <div className="block m-2 text-center w-1/3">
-                <div>12:19 AM</div>
-                <div>✔</div>
-              </div>
-              <button
-                type="button"
-                className="m-2"
-                // onClick={() => {
-                //   setmenuclick(!menuclick);
-                //   // console.log(menuclick);
-                // }}
+        {users &&
+          users.map((chatdata) => {
+            // console.log(chatdata);
+            return (
+              <div
+                key={chatdata.id}
+                className="flex max-w-full bg-white justify-between ite p-1"
               >
-                Add
-              </button>
-              <button
-                type="button"
-                className="m-2"
-                // onClick={() => {
-                //   setmenuclick(!menuclick);
-                //   // console.log(menuclick);
-                // }}
-              >
-                Remove
-              </button>
-            </div>
-          );
-        })}
+                <Image
+                  src="/user.svg"
+                  alt="user"
+                  className="w-16 h-auto"
+                  width={50}
+                  height={50}
+                />
+                <div className="block m-2 text-start my-auto w-full">
+                  <div className="text-xl font-semibold">
+                    {chatdata.username}
+                  </div>
+                  <div>{chatdata.email}</div>
+                </div>
+                <div className="block m-2 text-center w-1/3">
+                  <div>{new Date(chatdata.updatedAt).toLocaleString()}</div>
+                  <div>✔</div>
+                </div>
+                <button
+                  type="button"
+                  className="m-2"
+                  // onClick={() => {
+                  //   setmenuclick(!menuclick);
+                  //   // console.log(menuclick);
+                  // }}
+                >
+                  Add
+                </button>
+                <button
+                  type="button"
+                  className="m-2"
+                  // onClick={() => {
+                  //   setmenuclick(!menuclick);
+                  //   // console.log(menuclick);
+                  // }}
+                >
+                  Remove
+                </button>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

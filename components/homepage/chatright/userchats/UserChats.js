@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const obj = [
   {
@@ -55,11 +55,33 @@ const obj = [
 ];
 
 const UserChats = () => {
+  const [chats, Setchats] = useState();
+  const userToken = localStorage.getItem("userToken");
+  const userEmail = localStorage.getItem("userEmail");
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:4000/chat/fetch-chats`);
+        const data = await response.json();
+
+        // console.log(data);
+        Setchats(data.data.chats);
+      } catch {
+        alert("error");
+      }
+    }
+    {
+      userToken && fetchData();
+    }
+  }, []);
+
   return (
     <div className="h-screen overflow-auto pb-40 text-black">
-      {obj.map((chatdata) => {
-        // console.log(chatdata);
-        if (chatdata.id % 2 === 0) {
+      {chats &&
+        chats.map((chatdata) => {
+          // console.log(chatdata);
+          // if (chatdata.id % 2 === 0) {
           return (
             <div
               key={chatdata.id}
@@ -74,42 +96,47 @@ const UserChats = () => {
                   height={50}
                 />
                 <div className="block p-2 text-end max-w-1/2">
-                  <div className="text-darkgray font-semibold">{chatdata.title}</div>
+                  <div className="text-darkgray font-semibold">
+                    {chatdata.username}
+                  </div>
                   <div>{chatdata.message}</div>
                   <div className="text-xs text-end">
-                    12:19 AM<span>✔</span>
+                    {new Date(chatdata.createdAt).toLocaleString()}
+                    <span>✔</span>
                   </div>
                 </div>
               </div>
             </div>
           );
-        }
-        if (chatdata.id % 2 != 0) {
-          return (
-            <div
-              key={chatdata.id}
-              className="flex max-w-full justify-end m-2 items-start"
-            >
-              <div className="flex bg-white rounded-2xl">
-                <div className="block p-2 text-end max-w-1/2">
-                  <div className="text-darkgray font-semibold">{chatdata.title}</div>
-                  <div>{chatdata.message}</div>
-                  <div className="text-xs text-end">
-                    12:19 AM<span>✔</span>
-                  </div>
-                </div>
-                <Image
-                  src="/user.svg"
-                  alt="user"
-                  className="w-12 h-auto rounded-tl-3xl bg-gray"
-                  width={50}
-                  height={50}
-                />
-              </div>{" "}
-            </div>
-          );
-        }
-      })}
+          // }
+          // if (chatdata.id % 2 != 0) {
+          //   return (
+          //     <div
+          //       key={chatdata.id}
+          //       className="flex max-w-full justify-end m-2 items-start"
+          //     >
+          //       <div className="flex bg-white rounded-2xl">
+          //         <div className="block p-2 text-end max-w-1/2">
+          //           <div className="text-darkgray font-semibold">
+          //             {chatdata.title}
+          //           </div>
+          //           <div>{chatdata.message}</div>
+          //           <div className="text-xs text-end">
+          //             12:19 AM<span>✔</span>
+          //           </div>
+          //         </div>
+          //         <Image
+          //           src="/user.svg"
+          //           alt="user"
+          //           className="w-12 h-auto rounded-tl-3xl bg-gray"
+          //           width={50}
+          //           height={50}
+          //         />
+          //       </div>{" "}
+          //     </div>
+          //   );
+          // }
+        })}
     </div>
   );
 };

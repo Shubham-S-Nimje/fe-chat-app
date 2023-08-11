@@ -1,10 +1,51 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const MessageStripe = () => {
+  const [enteredMessage, setenteredMessage] = useState("");
+  const userToken = localStorage.getItem("userToken");
+  const userEmail = localStorage.getItem("userEmail");
+
+  const messageSubmitHandler = async (e) => {
+    e.preventDefault();
+    // console.log(enteredMessage);
+
+    const obj = {
+      message: enteredMessage,
+    };
+
+    try {
+      const response = await fetch("http://localhost:4000/chat/add-chat", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userToken,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // console.log(data);
+      } else {
+        const errData = await response.json();
+        // console.log(errData);
+        alert(errData);
+      }
+    } catch {
+      (err) => {
+        // console.log(err);
+        alert(err);
+      };
+    }
+  };
+
   return (
     <div className="flex w-ful justify-between p-2 sticky bottom-0 shadow-md">
-      <div className="flex justify-between w-full px-2 bg-gray rounded-full">
+      <form
+        onSubmit={messageSubmitHandler}
+        className="flex justify-between w-full px-2 bg-gray rounded-full"
+      >
         <Image
           src="/emoji.svg"
           alt="emoji"
@@ -12,11 +53,7 @@ const MessageStripe = () => {
           width={50}
           height={50}
         />
-        <input
-          src="/group.svg"
-          placeholder="Message"
-          className="w-full bg-white rounded-full px-4 m-2"
-        />
+
         <Image
           src="/clip.svg"
           alt="clip"
@@ -31,7 +68,18 @@ const MessageStripe = () => {
           width={50}
           height={50}
         />
-      </div>
+        <input
+          src="/group.svg"
+          placeholder="Message"
+          className="w-full bg-white text-black rounded-full px-4 m-2"
+          onChange={(e) => {
+            setenteredMessage(e.target.value);
+          }}
+        />
+        <button type="submit" className="w-12 h-auto p-1">
+          <Image src="/send.svg" alt="send" width={50} height={50} />
+        </button>
+      </form>
       <Image
         src="/mic.svg"
         alt="mic"

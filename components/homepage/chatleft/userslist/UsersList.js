@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const obj = [
   {
@@ -55,33 +55,36 @@ const obj = [
 ];
 
 const UsersList = () => {
+
+
   return (
     <div className="h-screen overflow-auto md:py-20">
-      {obj.map((chatdata) => {
-        // console.log(chatdata);
-        return (
-          <div
-            key={chatdata.id}
-            className="flex max-w-full bg-white justify-between p-1"
-          >
-            <Image
-              src="/user.svg"
-              alt="user"
-              className="w-16 h-auto"
-              width={50}
-              height={50}
-            />
-            <div className="block m-2 text-start my-auto w-full">
-              <div className="text-xl font-semibold">{chatdata.title}</div>
-              <div>{chatdata.message}</div>
+      {obj &&
+        obj.map((chatdata) => {
+          // console.log(chatdata);
+          return (
+            <div
+              key={chatdata.id}
+              className="flex max-w-full bg-white justify-between p-1"
+            >
+              <Image
+                src="/user.svg"
+                alt="user"
+                className="w-16 h-auto"
+                width={50}
+                height={50}
+              />
+              <div className="block m-2 text-start my-auto w-full">
+                <div className="text-xl font-semibold">{chatdata.title}</div>
+                <div>{chatdata.message}</div>
+              </div>
+              <div className="block m-2 text-center w-1/3">
+                <div>12:19 AM</div>
+                <div>✔</div>
+              </div>
             </div>
-            <div className="block m-2 text-center w-1/3">
-              <div>12:19 AM</div>
-              <div>✔</div>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

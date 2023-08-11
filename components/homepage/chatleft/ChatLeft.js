@@ -5,6 +5,7 @@ import SearchUsers from "./searchusers/SearchUsers";
 import UsersList from "./userslist/UsersList"
 
 const ChatLeft = (props) => {
+  // console.log(props.users)
   return (
     <div className="md:w-1/3 block bg-white">
       <UserStripe />
