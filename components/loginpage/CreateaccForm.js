@@ -10,10 +10,46 @@ const CreateaccForm = () => {
   const [enteredpass, Setenteredpass] = useState("");
   const [enteredconfirmpass, Setenteredconfirmpass] = useState("");
 
-  const onCreateaccHandler = (e) => {
+  const onCreateaccHandler = async (e) => {
     e.preventDefault();
-    console.log(enteredusername, enteredMail, enteredpass, enteredconfirmpass);
-    router.push("/");
+    // console.log(enteredusername, enteredMail, enteredpass, enteredconfirmpass);
+
+    const obj = {
+      username: enteredusername,
+      email: enteredMail,
+      password: enteredpass,
+    };
+
+    if (enteredpass === enteredconfirmpass) {
+      const url = "http://localhost:4000/auth/add-user";
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(obj),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data);
+          router.push("/");
+        } else {
+          const errData = await response.json();
+          // console.log(errData);
+          alert(errData);
+        }
+      } catch {
+        (err) => {
+          // console.log(err);
+          alert(err);
+        };
+      }
+    } else {
+      alert("Please check your password");
+    }
   };
 
   return (

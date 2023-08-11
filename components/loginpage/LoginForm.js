@@ -6,11 +6,40 @@ const LoginForm = () => {
   const [enteredpass, Setenteredpass] = useState("");
   const router = useRouter();
 
-  const OnloginHandler = (e) => {
+  const OnloginHandler = async (e) => {
     e.preventDefault();
-    console.log(enteredMail, enteredpass);
-    localStorage.setItem("userToken", enteredMail);
-    router.push("/");
+    // console.log(enteredMail, enteredpass);
+
+    const obj = {
+      email: enteredMail,
+      password: enteredpass,
+    };
+
+    try {
+      const response = await fetch("http://localhost:4000/auth/login-user", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        localStorage.setItem("userToken", enteredMail);
+        router.push("/");
+      } else {
+        const errData = await response.json();
+        console.log(errData);
+        alert(errData.message);
+      }
+    } catch {
+      (err) => {
+        console.log(err);
+        alert(err);
+      };
+    }
   };
   return (
     <form
