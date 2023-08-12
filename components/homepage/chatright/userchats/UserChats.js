@@ -9,6 +9,18 @@ const UserChats = (props) => {
 
   return (
     <div className="h-screen overflow-auto pb-40 text-black">
+      <div className="justify-center flex my-4">
+        <button
+          type="submit"
+          className="w-fit h-auto py-1 px-2 bg-darkgreen rounded-xl text-white font-semibold"
+          onClick={() => {
+            props.Setlastchatid(props.lastchatid - 5);
+            props.Setchatupdate(!props.chatupdate)
+          }}
+        >
+          See Older
+        </button>
+      </div>
       {props.chats &&
         props.chats.map((chatdata) => {
           // console.log(chatdata.email);
