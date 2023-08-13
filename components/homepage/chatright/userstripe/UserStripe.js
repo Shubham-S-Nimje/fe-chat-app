@@ -48,17 +48,17 @@ const UserStripe = () => {
         <Menubar />
       </div>
       {groupForm && (
-        <div className="absolute text-end">
-          <CreategrpForm />
+        <div className="absolute text-end bg-darkgreen p-2 rounded-lg border-2 border-white">
+          
           <button
             type="button"
-            className="px-2 py-1 m-2 text-2xl bg-red-600 text-white rounded-lg"
+            className="px-2 py-1 mb-2 text-2xl bg-red-600 text-white rounded-lg"
             onClick={() => {
               setgroupForm(false);
             }}
           >
-            Cancel
-          </button>
+            Close
+          </button><CreategrpForm setgroupForm={setgroupForm}/>
         </div>
       )}
     </div>

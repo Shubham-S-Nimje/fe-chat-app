@@ -10,7 +10,7 @@ const GroupsList = (props) => {
     <div className="h-screen overflow-auto md:py-20">
       {props.groups.length > 0 &&
         props.groups.map((groupData) => {
-          // console.log(groupData);
+          console.log(groupData);
           return (
             <button
               key={groupData.id}
@@ -31,7 +31,8 @@ const GroupsList = (props) => {
                 <div>{groupData.description}</div>
               </div>
               <div className="block m-2 text-center w-1/3">
-                <div>{new Date(groupData.createdAt).toLocaleString()}</div>
+              {/* <div>{groupData.createdAt}</div> */}
+              <div>{new Date(groupData.usergroup.createdAt).toLocaleString()}</div>
                 <div>✔</div>
               </div>
             </button>

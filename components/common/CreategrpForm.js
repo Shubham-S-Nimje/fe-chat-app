@@ -1,9 +1,11 @@
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const CreategrpForm = () => {
+const CreategrpForm = (props) => {
   const [enteredgrpname, Setenteredgrpname] = useState("");
   const [enteredDesc, SetenteredDesc] = useState("");
   const userToken = localStorage.getItem("userToken");
+  const router = useRouter();
 
   const onCreategrpHandler = async (e) => {
     e.preventDefault();
@@ -25,10 +27,13 @@ const CreategrpForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
+        props.setgroupForm(false)
+        alert(data.message);
+        router.push("/dashboard");
       } else {
         const errData = await response.json();
-        console.log(errData);
+        // console.log(errData);
       }
     } catch {
       (err) => {

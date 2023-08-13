@@ -17,26 +17,15 @@ const Adminpage = () => {
         {!makeadmin && (
           <button
             type="button"
-            className="m-2 bg-green px-2 py-1 rounded-lg"
+            className="m-2 bg-violet-950 px-2 py-1 rounded-lg"
             onClick={() => {
-              setmakeadmin(!makeadmin);
+              setmakeadmin(true);
+              setremoveUser(false);
+              setaddUser(false);
               // console.log(addUser);
             }}
           >
             Make admin of group
-          </button>
-        )}
-
-        {makeadmin && (
-          <button
-            type="button"
-            className="m-2 bg-green px-2 py-1 rounded-lg"
-            onClick={() => {
-              setmakeadmin(!makeadmin);
-              // console.log(addUser);
-            }}
-          >
-            Close
           </button>
         )}
 
@@ -45,24 +34,13 @@ const Adminpage = () => {
             type="button"
             className="m-2 bg-green px-2 py-1 rounded-lg"
             onClick={() => {
-              setaddUser(!addUser);
+              setmakeadmin(false);
+              setremoveUser(false);
+              setaddUser(true);
               // console.log(addUser);
             }}
           >
             Add users in group
-          </button>
-        )}
-
-        {addUser && (
-          <button
-            type="button"
-            className="m-2 bg-green px-2 py-1 rounded-lg"
-            onClick={() => {
-              setaddUser(!addUser);
-              // console.log(addUser);
-            }}
-          >
-            Close
           </button>
         )}
 
@@ -71,38 +49,81 @@ const Adminpage = () => {
             type="button"
             className="m-2 bg-red-600 px-2 py-1 rounded-lg"
             onClick={() => {
-              setremoveUser(!removeUser);
+              setmakeadmin(false);
+              setremoveUser(true);
+              setaddUser(false);
               // console.log(addUser);
             }}
           >
             Remove users from group
           </button>
         )}
+      </div>
 
-        {removeUser && (
+      {makeadmin && (
+        <div className="text-end bg-darkgreen p-2 rounded-lg border-2 border-white m-10">
           <button
             type="button"
-            className="m-2 bg-red-600 px-2 py-1 rounded-lg"
+            className="m-2 bg-red-600 px-2 py-1 rounded-lg text-white font-semibold"
             onClick={() => {
-              setremoveUser(!removeUser);
+              setmakeadmin(false);
+              setremoveUser(false);
+              setaddUser(false);
               // console.log(addUser);
             }}
           >
             Close
           </button>
-        )}
-      </div>
-      {makeadmin && <MakeadminForm />}
-      {addUser && <AdduserForm />}
-      {removeUser && <RemoveuserForm />}
+          <MakeadminForm />
+        </div>
+      )}
+
+      {addUser && (
+        <div className="text-end bg-darkgreen p-2 rounded-lg border-2 border-white m-10">
+          <button
+            type="button"
+            className="m-2 bg-red-600 px-2 py-1 rounded-lg text-white font-semibold"
+            onClick={() => {
+              setmakeadmin(false);
+              setremoveUser(false);
+              setaddUser(false);
+              // console.log(addUser);
+            }}
+          >
+            Close
+          </button>
+          <AdduserForm />
+        </div>
+      )}
+
+      {removeUser && (
+        <div className="text-end bg-darkgreen p-2 rounded-lg border-2 border-white m-10">
+          <button
+            type="button"
+            className="m-2 bg-red-600 px-2 py-1 rounded-lg text-white font-semibold"
+            onClick={() => {
+              setmakeadmin(false);
+              setremoveUser(false);
+              setaddUser(false);
+              // console.log(addUser);
+            }}
+          >
+            Close
+          </button>
+          <RemoveuserForm />
+        </div>
+      )}
       <div className="h-screen overflow-auto">
+        <h3 className="text-3xl max-sm:text-lg flex justify-center bg-green rounded-lg m-2 p-2 font-semibold text-white">
+          Users list
+        </h3>
         {users &&
           users.map((chatdata) => {
             // console.log(chatdata);
             return (
               <div
                 key={chatdata.id}
-                className="flex max-w-full bg-white justify-between ite p-1"
+                className="flex max-w-full bg-white justify-between ite p-1 rounded-lg m-2"
               >
                 <Image
                   src="/user.svg"
