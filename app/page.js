@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Fragment } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "./redux/userslice";
 
 const Home = () => {
   const router = useRouter();
-  const [users, Setusers] = useState({});
   const [login, Setlogin] = useState(false);
   const [showusers, Setshowusers] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
@@ -29,8 +31,8 @@ const Home = () => {
         const response = await fetch(`http://localhost:4000/auth/fetch-users`);
         const data = await response.json();
 
-        // console.log(data);
-        Setusers(data.users.users)
+        // console.log(data.users.users);
+        dispatch(setUser(data.users.users));
       } catch {
         alert("error");
       }

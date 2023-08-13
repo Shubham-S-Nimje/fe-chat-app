@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/app/redux/userslice";
 
 const LoginForm = () => {
   const [enteredMail, SetenteredMail] = useState("");
   const [enteredpass, Setenteredpass] = useState("");
+  // const dispatch = useDispatch();
   const router = useRouter();
 
   const OnloginHandler = async (e) => {
@@ -29,16 +32,17 @@ const LoginForm = () => {
         // console.log(data);
         localStorage.setItem("userToken", data.user.authToken);
         localStorage.setItem("userEmail", enteredMail);
+        // dispatch(setUser(data.user))
         router.push("/");
       } else {
         const errData = await response.json();
         // console.log(errData);
-        alert(errData);
+        alert(errData.message);
       }
     } catch {
       (err) => {
         // console.log(err);
-        alert(err);
+        alert(err.message);
       };
     }
   };

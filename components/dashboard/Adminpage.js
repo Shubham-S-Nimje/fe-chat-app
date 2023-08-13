@@ -1,81 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import AdduserForm from "./AdduserForm";
-
-const obj = [
-  {
-    id: 1,
-    title: "group1",
-    message: "this is message",
-  },
-  {
-    id: 2,
-    title: "group2",
-    message: "this is message",
-  },
-  {
-    id: 3,
-    title: "group3",
-    message: "this is message",
-  },
-  {
-    id: 4,
-    title: "group4",
-    message: "this is message",
-  },
-  {
-    id: 5,
-    title: "group5",
-    message: "this is message",
-  },
-  {
-    id: 6,
-    title: "group6",
-    message: "this is message",
-  },
-  {
-    id: 7,
-    title: "group7",
-    message: "this is message",
-  },
-  {
-    id: 8,
-    title: "group8",
-    message: "this is message",
-  },
-  {
-    id: 9,
-    title: "group9",
-    message: "this is message",
-  },
-  {
-    id: 10,
-    title: "group10",
-    message: "this is message",
-  },
-];
+import { useSelector } from "react-redux";
 
 const Adminpage = () => {
   const [addUser, setaddUser] = useState(false);
-  const [users, Setusers] = useState();
-  const userToken = localStorage.getItem("userToken");
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`http://localhost:4000/auth/fetch-users`);
-        const data = await response.json();
-
-        // console.log(data);
-        Setusers(data.users.users);
-      } catch {
-        alert("error");
-      }
-    }
-    {
-      userToken && fetchData();
-    }
-  }, []);
+  const users = useSelector((state) => state.user.users);
 
   return (
     <div className="min-h-screen">
@@ -89,7 +19,7 @@ const Adminpage = () => {
               // console.log(addUser);
             }}
           >
-            Add New User
+            Add users in group
           </button>
         )}
         {addUser && (

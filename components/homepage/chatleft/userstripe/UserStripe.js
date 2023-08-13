@@ -5,7 +5,7 @@ import React, { useState } from "react";
 const UserStripe = () => {
   return (
     <div className="bg-darkgreen p-2 sticky top-0 max-sm:hidden">
-      <BrandLogo/>
+      <BrandLogo />
     </div>
   );
 };

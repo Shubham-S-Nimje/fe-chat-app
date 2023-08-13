@@ -1,8 +1,11 @@
+import CreategrpForm from "@/components/common/CreategrpForm";
 import Menubar from "@/components/common/Menubar";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const UserStripe = () => {
+  const [groupForm, setgroupForm] = useState(false);
+
   return (
     <div className="flex w-full bg-darkgreen justify-between p-4 md:sticky top-0 max-sm:text-sm ">
       <div className="flex">
@@ -21,13 +24,43 @@ const UserStripe = () => {
       <Image
         src="/search.svg"
         alt="search"
-        className="w-8 max-sm:w-6 mx-4 h-auto"
+        className="w-8 h-auto x-1 my-2 block cursor-pointer text-2xl m-2"
         width={50}
         height={50}
       />
-      <div className="max-sm:hidden">
+      <button
+        type="button"
+        className="px-1 my-2 block cursor-pointer text-2xl m-2"
+        onClick={() => {
+          setgroupForm(true);
+        }}
+      >
+        <Image
+          src="/creategroup.svg"
+          alt="creategroup"
+          className="w-10 h-auto"
+          width={50}
+          height={50}
+        />
+      </button>
+
+      <div className="max-sm:hidden px-1 my-2 block cursor-pointer text-2xl m-2">
         <Menubar />
       </div>
+      {groupForm && (
+        <div className="absolute text-end">
+          <CreategrpForm />
+          <button
+            type="button"
+            className="px-2 py-1 m-2 text-2xl bg-red-600 text-white rounded-lg"
+            onClick={() => {
+              setgroupForm(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 };

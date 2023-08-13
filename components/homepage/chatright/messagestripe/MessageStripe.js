@@ -1,9 +1,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const MessageStripe = (props) => {
   const [enteredMessage, setenteredMessage] = useState("");
   const userToken = localStorage.getItem("userToken");
+  const activegroup = useSelector((state) => state.activegroup.activegroup);
+
+  // console.log("activegroup", activegroup);
 
   const messageSubmitHandler = async (e) => {
     e.preventDefault();
@@ -11,6 +15,7 @@ const MessageStripe = (props) => {
 
     const obj = {
       message: enteredMessage,
+      activegrpid: activegroup
     };
 
     try {
@@ -26,8 +31,8 @@ const MessageStripe = (props) => {
       if (response.ok) {
         const data = await response.json();
         // console.log(data);
-        setenteredMessage('')
-        props.Setchatupdate(!props.chatupdate)
+        setenteredMessage("");
+        props.Setchatupdate(!props.chatupdate);
       } else {
         const errData = await response.json();
         // console.log(errData);
