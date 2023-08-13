@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const AdduserForm = () => {
+const MakeadminForm = () => {
   const userToken = localStorage.getItem("userToken");
   const router = useRouter();
   const groups = useSelector((state) => state.group.groups);
@@ -26,7 +26,7 @@ const AdduserForm = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:4000/group/adduser-togroup`,
+          `http://localhost:4000/group/makeadmin-ofgroup`,
           {
             method: "POST",
             headers: {
@@ -58,7 +58,7 @@ const AdduserForm = () => {
       className="p-12 max-md:p-10 bg-white items-center text-center justify-center rounded-lg shadow-2xl max-sm:text-sm"
       onSubmit={onFormsubmit}
     >
-      <h3 className="text-3xl max-sm:text-lg m-2">Add users in group</h3>
+      <h3 className="text-3xl max-sm:text-lg m-2">Make users admin of group</h3>
       <p className="text-md max-sm:text-sm m-2">
         Please select group then user and submit.
       </p>
@@ -107,4 +107,4 @@ const AdduserForm = () => {
   );
 };
 
-export default AdduserForm;
+export default MakeadminForm;

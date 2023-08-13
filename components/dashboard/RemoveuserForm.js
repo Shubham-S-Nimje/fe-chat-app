@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const AdduserForm = () => {
+const RemoveuserForm = () => {
   const userToken = localStorage.getItem("userToken");
   const router = useRouter();
   const groups = useSelector((state) => state.group.groups);
@@ -26,7 +26,7 @@ const AdduserForm = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:4000/group/adduser-togroup`,
+          `http://localhost:4000/group/removeuser-fromgroup`,
           {
             method: "POST",
             headers: {
@@ -58,7 +58,7 @@ const AdduserForm = () => {
       className="p-12 max-md:p-10 bg-white items-center text-center justify-center rounded-lg shadow-2xl max-sm:text-sm"
       onSubmit={onFormsubmit}
     >
-      <h3 className="text-3xl max-sm:text-lg m-2">Add users in group</h3>
+      <h3 className="text-3xl max-sm:text-lg m-2">Remove users from group</h3>
       <p className="text-md max-sm:text-sm m-2">
         Please select group then user and submit.
       </p>
@@ -73,7 +73,8 @@ const AdduserForm = () => {
             // console.log(e.target.value);
             Setenteredgroup(e.target.value);
           }}
-        ><option>Select group</option>
+        >
+          <option>Select group</option>
           {groups.map((group) => {
             return <option key={group.id} value={`${group.id}`}>{group.grpname}</option>;
           })}
@@ -86,12 +87,13 @@ const AdduserForm = () => {
         <select
           required
           className="w-full rounded-md border-2 p-2 my-2"
-          defaultValue={''}
+          defaultValue={""}
           onChange={(e) => {
             // console.log(e.target.value);
             Setentereduser(e.target.value);
           }}
-        ><option >Select User</option>
+        >
+          <option>Select User</option>
           {users.map((user) => {
             return <option key={user.id} value={`${user.id}`}>{user.username}</option>;
           })}
@@ -107,4 +109,4 @@ const AdduserForm = () => {
   );
 };
 
-export default AdduserForm;
+export default RemoveuserForm;
