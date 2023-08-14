@@ -14,7 +14,7 @@ const Menubar = () => {
     const userEmail = localStorage.getItem("userEmail");
     const filteredUser = users.filter((user) => user.email === userEmail);
     setlogedinUser(filteredUser);
-  }, []);
+  }, [users]);
 
   // console.log(logedinUser.length);
 

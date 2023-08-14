@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const MakeadminForm = () => {
+const MakeadminForm = (props) => {
   const userToken = localStorage.getItem("userToken");
   const router = useRouter();
   const groups = useSelector((state) => state.group.groups);
@@ -40,6 +40,7 @@ const MakeadminForm = () => {
         console.log(data);
         if (response.ok) {
           console.log(response);
+          props.setmakeadmin(false)
         } else {
           console.log(response);
         }

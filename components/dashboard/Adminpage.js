@@ -10,6 +10,8 @@ const Adminpage = () => {
   const [removeUser, setremoveUser] = useState(false);
   const [makeadmin, setmakeadmin] = useState(false);
   const users = useSelector((state) => state.user.users);
+  const groups = useSelector((state) => state.group);
+  // console.log(groups.groups)
 
   return (
     <div className="min-h-screen">
@@ -74,7 +76,7 @@ const Adminpage = () => {
           >
             Close
           </button>
-          <MakeadminForm />
+          <MakeadminForm setmakeadmin={setmakeadmin}/>
         </div>
       )}
 
@@ -92,7 +94,7 @@ const Adminpage = () => {
           >
             Close
           </button>
-          <AdduserForm />
+          <AdduserForm setaddUser={setaddUser}/>
         </div>
       )}
 
@@ -110,15 +112,15 @@ const Adminpage = () => {
           >
             Close
           </button>
-          <RemoveuserForm />
+          <RemoveuserForm setremoveUser={setremoveUser}/>
         </div>
       )}
       <div className="h-screen overflow-auto">
         <h3 className="text-3xl max-sm:text-lg flex justify-center bg-green rounded-lg m-2 p-2 font-semibold text-white">
-          Users list
+          Your group list
         </h3>
-        {users &&
-          users.map((chatdata) => {
+        {groups.groups &&
+          groups.groups.map((chatdata) => {
             // console.log(chatdata);
             return (
               <div
@@ -134,15 +136,15 @@ const Adminpage = () => {
                 />
                 <div className="block m-2 text-start my-auto w-full">
                   <div className="text-xl font-semibold">
-                    {chatdata.username}
+                    {chatdata.grpname}
                   </div>
-                  <div>{chatdata.email}</div>
+                  <div>{chatdata.description}</div>
                 </div>
                 <div className="block m-2 text-center w-1/3">
-                  <div>{new Date(chatdata.updatedAt).toLocaleString()}</div>
+                  <div>{new Date(chatdata.usergroup.updatedAt).toLocaleString()}</div>
                   <div>✔</div>
                 </div>
-                <button
+                {/* <button
                   type="button"
                   className="m-2"
                   // onClick={() => {
@@ -161,7 +163,7 @@ const Adminpage = () => {
                   // }}
                 >
                   Remove
-                </button>
+                </button> */}
               </div>
             );
           })}

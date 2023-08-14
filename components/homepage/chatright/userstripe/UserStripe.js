@@ -2,9 +2,14 @@ import CreategrpForm from "@/components/common/CreategrpForm";
 import Menubar from "@/components/common/Menubar";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserStripe = () => {
   const [groupForm, setgroupForm] = useState(false);
+  const activegroup = useSelector((state) => state.activegroup.activegroup);
+  const activeuser = useSelector((state) => state.activeuser.activeuser);
+
+  // console.log("activegroup", activegroup, "activeuser", activeuser);
 
   return (
     <div className="flex w-full bg-darkgreen justify-between p-4 md:sticky top-0 max-sm:text-sm ">
@@ -18,7 +23,10 @@ const UserStripe = () => {
         />
       </div>
       <div className="block m-4 text-start my-auto w-full overflow-hidden whitespace-nowrap overflow-ellipsis">
-        <div className="text-xl max-sm:text-sm font-bold">Frontend Group</div>
+        <div className="text-xl max-sm:text-sm font-bold">
+          {(activegroup && activegroup.grpname) ||
+            (activeuser && activeuser.username) || 'Welcome to chatapp'}
+        </div>
         <div className="">girish, hrushi, shubham, nayan, vaibhav, etc</div>
       </div>
       <Image
@@ -49,7 +57,6 @@ const UserStripe = () => {
       </div>
       {groupForm && (
         <div className="absolute text-end bg-darkgreen p-2 rounded-lg border-2 border-white">
-          
           <button
             type="button"
             className="px-2 py-1 mb-2 text-2xl bg-red-600 text-white rounded-lg"
@@ -58,7 +65,8 @@ const UserStripe = () => {
             }}
           >
             Close
-          </button><CreategrpForm setgroupForm={setgroupForm}/>
+          </button>
+          <CreategrpForm setgroupForm={setgroupForm} />
         </div>
       )}
     </div>

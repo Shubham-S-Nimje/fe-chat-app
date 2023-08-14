@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const AdduserForm = () => {
+const AdduserForm = (props) => {
   const userToken = localStorage.getItem("userToken");
   const router = useRouter();
   const groups = useSelector((state) => state.group.groups);
@@ -40,6 +40,7 @@ const AdduserForm = () => {
         console.log(data);
         if (response.ok) {
           console.log(response);
+          props.setaddUser(false)
         } else {
           console.log(response);
         }

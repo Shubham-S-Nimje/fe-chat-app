@@ -6,6 +6,7 @@ const MessageStripe = (props) => {
   const [enteredMessage, setenteredMessage] = useState("");
   const userToken = localStorage.getItem("userToken");
   const activegroup = useSelector((state) => state.activegroup.activegroup);
+  const activeuser = useSelector((state) => state.activeuser.activeuser);
 
   // console.log("activegroup", activegroup);
 
@@ -15,7 +16,8 @@ const MessageStripe = (props) => {
 
     const obj = {
       message: enteredMessage,
-      activegrpid: activegroup
+      activegrpid: activegroup && activegroup.id,
+      activeuserid: activeuser && activeuser.id
     };
 
     try {

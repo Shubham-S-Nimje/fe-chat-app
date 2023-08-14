@@ -17,19 +17,21 @@ const ChatRight = () => {
   const [lastchatid, Setlastchatid] = useState(lastChatId);
 
   const activegroup = useSelector((state) => state.activegroup.activegroup);
+  const activeuser = useSelector((state) => state.activeuser.activeuser);
 
-  // console.log("activegroup", activegroup);
+  // console.log("activegroup", activegroup && activegroup.id, "activeuser", activeuser);
 
-  // console.log(lastchatid);
+  // console.log(activeuser);
   useEffect(() => {
     const obj = {
       groupId: activegroup,
+      userId: activeuser,
       lastchatid: lastchatid,
     };
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:4000/chat/fetch-chats/resource?id=${activegroup}&id=${lastchatid}`,
+          `http://localhost:4000/chat/fetch-chats/resource?id=${activegroup && activegroup.id}&id=${lastchatid}&id=${activeuser && activeuser.id}`,
           {
             method: "POST",
             headers: {
@@ -49,15 +51,15 @@ const ChatRight = () => {
         } else {
           console.log(data.message);
         }
-      } catch (err){
-        console.log(err)
+      } catch (err) {
+        console.log(err);
         alert("error");
       }
     }
     if (userToken) {
       fetchData();
     }
-  }, [chatupdate, activegroup]);
+  }, [chatupdate, activegroup, activeuser]);
 
   // setInterval(() => {
   //   Setchatupdate(!chatupdate)

@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const RemoveuserForm = () => {
+const RemoveuserForm = (props) => {
   const userToken = localStorage.getItem("userToken");
   const router = useRouter();
   const groups = useSelector((state) => state.group.groups);
@@ -40,6 +40,7 @@ const RemoveuserForm = () => {
         console.log(data);
         if (response.ok) {
           console.log(response);
+          props.setremoveUser(false)
         } else {
           console.log(response);
         }

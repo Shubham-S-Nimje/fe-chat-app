@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import AuthSlice from "./authslice";
 import userReducer from "./userslice";
 import activegrpReducer from "./activegrpslice";
+import activeuserReducer from "./activeuserslice";
 import groupReducer from "./groupslice";
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     user: userReducer,
     group: groupReducer,
     activegroup: activegrpReducer,
+    activeuser: activeuserReducer,
   },
 });
 
