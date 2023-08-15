@@ -1,9 +1,13 @@
+import { setchatLastid } from "@/app/redux/chatLastid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserChats = (props) => {
   const userToken = localStorage.getItem("userToken");
   const userEmail = localStorage.getItem("userEmail");
+  const dispatch = useDispatch();
+  const chatLastid = useSelector((state) => state.chatLastid.chatLastid);
 
   // console.log(props.chats,userEmail);
 
@@ -14,14 +18,15 @@ const UserChats = (props) => {
           type="submit"
           className="w-fit h-auto py-1 px-2 bg-darkgreen rounded-xl text-white font-semibold"
           onClick={() => {
-            props.Setlastchatid(props.lastchatid - 5);
-            props.Setchatupdate(!props.chatupdate)
+            dispatch(setchatLastid(chatLastid + 5));
+            props.Setlastchatid(props.lastchatid + 5);
+            props.Setchatupdate(!props.chatupdate);
           }}
         >
           See Older
         </button>
       </div>
-      {props.chats &&
+      {props.chats.length > 0 &&
         props.chats.map((chatdata) => {
           // console.log(chatdata.email);
           if (chatdata.email === userEmail) {

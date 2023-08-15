@@ -1,5 +1,6 @@
 import { setActivegroup } from "@/app/redux/activegrpslice";
 import { setActiveuser } from "@/app/redux/activeuserslice";
+import { setchatLastid } from "@/app/redux/chatLastid";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ const GroupsList = (props) => {
               onClick={(e) => {
                 dispatch(setActivegroup(groupData));
                 dispatch(setActiveuser(null));
+                dispatch(setchatLastid(5));
               }}
             >
               <Image
@@ -55,6 +57,7 @@ const GroupsList = (props) => {
                 onClick={(e) => {
                   dispatch(setActiveuser(chatdata));
                   dispatch(setActivegroup(null));
+                  dispatch(setchatLastid(5));
                 }}
               >
                 <Image

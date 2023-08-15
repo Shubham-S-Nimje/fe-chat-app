@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/app/redux/userslice";
+import { setislogedin } from "@/app/redux/authslice";
 
 const LoginForm = () => {
   const [enteredMail, SetenteredMail] = useState("");
   const [enteredpass, Setenteredpass] = useState("");
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const OnloginHandler = async (e) => {
@@ -32,7 +32,7 @@ const LoginForm = () => {
         // console.log(data);
         localStorage.setItem("userToken", data.user.authToken);
         localStorage.setItem("userEmail", enteredMail);
-        // dispatch(setUser(data.user))
+        dispatch(setislogedin(true))
         router.push("/");
       } else {
         const errData = await response.json();

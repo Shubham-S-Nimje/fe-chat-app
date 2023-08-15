@@ -1,14 +1,16 @@
+import { setislogedin } from "@/app/redux/authslice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Menubar = () => {
   const router = useRouter();
   const [menuclick, setmenuclick] = useState(false);
   const [logedinUser, setlogedinUser] = useState([]);
   const users = useSelector((state) => state.user.users);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
@@ -82,8 +84,9 @@ const Menubar = () => {
           onClick={() => {
             localStorage.removeItem("userToken");
             localStorage.removeItem("userEmail");
-            localStorage.removeItem("chats")
+            localStorage.removeItem("chats");
             router.push("/login");
+            dispatch(setislogedin(false));
           }}
         >
           LOG OUT

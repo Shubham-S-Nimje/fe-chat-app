@@ -1,20 +1,17 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialAuthState = { isAuthenticated: false };
+const initialState = { islogedin: false };
 
 const AuthSlice = createSlice({
-  name: "authentication",
-  initialState: initialAuthState,
+  name: "auth",
+  initialState,
   reducers: {
-    userlogin(state) {
-      state.isAuthenticated = true;
-    },
-    userlogout(state) {
-      state.isAuthenticated = false;
+    setislogedin: (state, action) => {
+      state.islogedin = action.payload;
     },
   },
 });
 
 export default AuthSlice.reducer;
-export const { userlogin, userlogout } = AuthSlice.actions;
+export const { setislogedin } = AuthSlice.actions;

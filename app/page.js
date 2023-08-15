@@ -9,12 +9,22 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/userslice";
+import { setislogedin } from "./redux/authslice";
 
 const Home = () => {
   const router = useRouter();
   const [login, Setlogin] = useState(false);
   const [showusers, Setshowusers] = useState(true);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      dispatch(setislogedin(true));
+    } else {
+      dispatch(setislogedin(false));
+    }
+  }, [login]);
 
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
