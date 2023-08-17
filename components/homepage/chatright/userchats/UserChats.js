@@ -1,11 +1,13 @@
 import { setchatLastid } from "@/app/redux/chatLastid";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserChats = (props) => {
   const userToken = localStorage.getItem("userToken");
   const userEmail = localStorage.getItem("userEmail");
+  const [isFileurl, setisFileurl] = useState("");
   const dispatch = useDispatch();
   const chatLastid = useSelector((state) => state.chatLastid.chatLastid);
 
@@ -28,7 +30,28 @@ const UserChats = (props) => {
       </div>
       {props.chats.length > 0 &&
         props.chats.map((chatdata) => {
-          // console.log(chatdata.email);
+          // console.log(chatdata.message);
+          let file;
+          if (chatdata.message.includes("amazonaws.com")) {
+            file = (
+              <Link
+                href={chatdata.message}
+                target="_blank"
+                className="w-12 h-auto p-2"
+              >
+                <Image
+                  src={chatdata.message}
+                  alt="file"
+                  className=""
+                  width={200}
+                  height={200}
+                />
+              </Link>
+            );
+          } else {
+            file = <div>{chatdata.message}</div>;
+          }
+
           if (chatdata.email === userEmail) {
             return (
               <div
@@ -40,7 +63,7 @@ const UserChats = (props) => {
                     <div className="text-darkgray font-semibold">
                       {chatdata.username}
                     </div>
-                    <div>{chatdata.message}</div>
+                    {<div>{file}</div>}
                     <div className="text-xs text-end">
                       {new Date(chatdata.createdAt).toLocaleString()}
                       <span>✔</span>
@@ -74,7 +97,7 @@ const UserChats = (props) => {
                     <div className="text-darkgray font-semibold">
                       {chatdata.username}
                     </div>
-                    <div>{chatdata.message}</div>
+                    {file}
                     <div className="text-xs text-end">
                       {new Date(chatdata.createdAt).toLocaleString()}
                       <span>✔</span>

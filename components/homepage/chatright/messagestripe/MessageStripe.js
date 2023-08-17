@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 const MessageStripe = (props) => {
@@ -7,6 +7,8 @@ const MessageStripe = (props) => {
   const userToken = localStorage.getItem("userToken");
   const activegroup = useSelector((state) => state.activegroup.activegroup);
   const activeuser = useSelector((state) => state.activeuser.activeuser);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const imageInputRef = useRef(null);
 
   // console.log("activegroup", activegroup);
 
@@ -17,7 +19,7 @@ const MessageStripe = (props) => {
     const obj = {
       message: enteredMessage,
       activegrpid: activegroup && activegroup.id,
-      activeuserid: activeuser && activeuser.id
+      activeuserid: activeuser && activeuser.id,
     };
 
     try {
@@ -48,6 +50,48 @@ const MessageStripe = (props) => {
     }
   };
 
+  const openImageInput = () => {
+    imageInputRef.current.click();
+  };
+
+  const imageUploadHandler = async (e) => {
+    e.preventDefault();
+
+    setSelectedImage(e.target.files[0]);
+    console.log(selectedImage);
+
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    formData.append("activegrpid", activegroup && activegroup.id);
+    formData.append("activeuserid", activeuser && activeuser.id);
+
+    console.log(formData);
+
+    try {
+      const response = await fetch("http://localhost:4000/chat/add-image", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: localStorage.getItem("userToken"),
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        // setEnteredMessage("");
+        props.setChatUpdate(!props.chatUpdate);
+      } else {
+        const errData = await response.json();
+        console.log(errData);
+        alert(errData.error);
+      }
+    } catch (error) {
+      console.error("Error sending image:", error);
+      alert("An error occurred while sending the image.");
+    }
+  };
+
   return (
     <div className="flex w-ful justify-between p-2 sticky bottom-0 shadow-md">
       <form
@@ -63,19 +107,33 @@ const MessageStripe = (props) => {
         />
 
         <Image
-          src="/clip.svg"
-          alt="clip"
-          className="w-12 h-auto p-3"
-          width={50}
-          height={50}
-        />
-        <Image
           src="/camera.svg"
           alt="camera"
           className="w-12 h-auto p-3"
           width={50}
           height={50}
         />
+
+        <input
+          type="file"
+          className="hidden"
+          onChange={imageUploadHandler}
+          ref={imageInputRef}
+        />
+        <button
+          type="button"
+          onClick={openImageInput}
+          className="w-12 h-auto p-2"
+        >
+          <Image
+            src="/clip.svg"
+            alt="clip"
+            className="w-12 h-auto"
+            width={50}
+            height={50}
+          />
+        </button>
+
         <input
           src="/group.svg"
           placeholder="Message"
